@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "netfilter.h": "c",
+        "libnetfilter_queue.h": "c",
+        "string.h": "c",
+        "udp.h": "c",
+        "linux_nfnetlink_queue.h": "c",
+        "in.h": "c",
+        "stdio.h": "c"
+    }
+}

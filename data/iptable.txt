@@ -1,0 +1,128 @@
+# iptables -L
+Chain INPUT (policy ACCEPT)
+target     prot opt source               destination         
+DROP       tcp  --  anywhere             anywhere            tcp dpt:5555 
+DROP       tcp  --  anywhere             anywhere            tcp dpt:5555 
+DROP       udp  --  anywhere             anywhere            udp dpt:5555 
+DROP       udp  --  anywhere             anywhere            udp dpt:5555 
+DROP       udp  --  anywhere             anywhere            multiport dports 7547 
+DROP       tcp  --  anywhere             anywhere            multiport dports 7547 
+DROP       udp  --  anywhere             anywhere            udp dpt:5555 
+DROP       tcp  --  anywhere             anywhere            tcp dpt:5555 
+DROP       udp  --  anywhere             anywhere            udp dpt:12345 
+DROP       tcp  --  anywhere             anywhere            tcp dpt:12345 
+ACL        all  --  anywhere             anywhere            
+DHCP_PORT_FLT  all  --  anywhere             anywhere            
+FIREWALL   all  --  anywhere             anywhere            
+FIREWALL_WAN0  all  --  anywhere             anywhere            
+FIREWALL_WAN1  all  --  anywhere             anywhere            
+FIREWALL_WAN2  all  --  anywhere             anywhere            
+FIREWALL_WAN3  all  --  anywhere             anywhere            
+FIREWALL_WAN4  all  --  anywhere             anywhere            
+FIREWALL_WAN5  all  --  anywhere             anywhere            
+FIREWALL_WAN6  all  --  anywhere             anywhere            
+FIREWALL_WAN7  all  --  anywhere             anywhere            
+ICMP_FLOOD_CHECK  all  --  anywhere             anywhere            
+
+Chain FORWARD (policy ACCEPT)
+target     prot opt source               destination         
+ipfilter_chain  all  --  anywhere             anywhere            
+url_filter_chain  tcp  --  anywhere             anywhere            multiport dports http 
+app_filter_chain  tcp  --  anywhere             anywhere            
+app_filter_chain  udp  --  anywhere             anywhere            
+TCPMSS     tcp  --  anywhere             anywhere            tcp flags:SYN,RST/SYN TCPMSS clamp to PMTU 
+
+Chain OUTPUT (policy ACCEPT)
+target     prot opt source               destination         
+
+Chain ACL (1 references)
+target     prot opt source               destination         
+acl_chain  tcp  --  anywhere             anywhere            multiport dports ftp,telnet,tftp,snmp,ssh,http,https 
+acl_chain  udp  --  anywhere             anywhere            multiport dports ftp,telnet,tftp,snmp,ssh,http,https 
+acl_chain  icmp --  anywhere             anywhere            icmp echo-request 
+
+Chain DHCP_PORT_FLT (1 references)
+target     prot opt source               destination         
+ACCEPT     udp  --  anywhere             anywhere            mark match 0x10000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0x20000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0x50000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0x60000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0x70000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0x80000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0xb0000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0xc0000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0xd0000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0xe0000000/0xf0000000 udp dpt:bootps 
+ACCEPT     udp  --  anywhere             anywhere            mark match 0xa0000000/0xf0000000 udp dpt:bootps 
+DROP       udp  --  anywhere             anywhere            udp dpt:bootps 
+
+Chain FIREWALL (1 references)
+target     prot opt source               destination         
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:7547 
+ACCEPT     tcp  --  anywhere             anywhere            multiport dports 9000,ssh,12345,telnet 
+ACCEPT     udp  --  anywhere             anywhere            multiport dports 51231,9000,bootps,1900,dhcpv6-server 
+ACCEPT     tcp  --  anywhere             anywhere            multiport sports domain 
+ACCEPT     udp  --  anywhere             anywhere            multiport sports domain 
+ACCEPT     udp  --  anywhere             anywhere            multiport dports domain 
+ACCEPT     esp  --  anywhere             anywhere            
+ACCEPT     igmp --  anywhere             anywhere            limit: avg 100/sec burst 5 
+
+Chain FIREWALL_WAN0 (1 references)
+target     prot opt source               destination         
+DROP       all  --  anywhere             anywhere            state INVALID,NEW 
+DROP       icmp --  anywhere             anywhere            icmp echo-request 
+
+Chain FIREWALL_WAN1 (1 references)
+target     prot opt source               destination         
+
+Chain FIREWALL_WAN2 (1 references)
+target     prot opt source               destination         
+
+Chain FIREWALL_WAN3 (1 references)
+target     prot opt source               destination         
+
+Chain FIREWALL_WAN4 (1 references)
+target     prot opt source               destination         
+
+Chain FIREWALL_WAN5 (1 references)
+target     prot opt source               destination         
+
+Chain FIREWALL_WAN6 (1 references)
+target     prot opt source               destination         
+
+Chain FIREWALL_WAN7 (1 references)
+target     prot opt source               destination         
+
+Chain ICMP_FLOOD_CHECK (4 references)
+target     prot opt source               destination         
+ACCEPT     icmp --  anywhere             anywhere            limit: avg 100/sec burst 150 
+DROP       icmp --  anywhere             anywhere            
+
+Chain acl_chain (3 references)
+target     prot opt source               destination         
+ACCEPT     udp  --  anywhere             anywhere            multiport dports domain 
+ACCEPT     tcp  --  anywhere             anywhere            multiport dports http,https source IP range 0.0.0.0-223.255.255.255 
+ACCEPT     udp  --  anywhere             anywhere            multiport dports http,https source IP range 0.0.0.0-223.255.255.255 
+ICMP_FLOOD_CHECK  icmp --  anywhere             anywhere            icmp echo-request source IP range 0.0.0.0-223.255.255.255 
+ACCEPT     tcp  --  anywhere             anywhere            multiport dports ftp,telnet,tftp,snmp,ssh,http,https source IP range 0.0.0.0-223.255.255.255 
+ACCEPT     udp  --  anywhere             anywhere            multiport dports ftp,telnet,tftp,snmp,ssh,http,https source IP range 0.0.0.0-223.255.255.255 
+ICMP_FLOOD_CHECK  icmp --  anywhere             anywhere            icmp echo-request source IP range 0.0.0.0-223.255.255.255 
+ACCEPT     tcp  --  anywhere             anywhere            multiport dports ftp,telnet,tftp,snmp,ssh,http,https source IP range 0.0.0.0-223.255.255.255 
+ACCEPT     udp  --  anywhere             anywhere            multiport dports ftp,telnet,tftp,snmp,ssh,http,https source IP range 0.0.0.0-223.255.255.255 
+ICMP_FLOOD_CHECK  icmp --  anywhere             anywhere            icmp echo-request source IP range 0.0.0.0-223.255.255.255 
+DROP       all  --  anywhere             anywhere            
+
+Chain app_filter_chain (2 references)
+target     prot opt source               destination         
+
+Chain ipfilter_chain (1 references)
+target     prot opt source               destination         
+
+Chain snmp_chain (0 references)
+target     prot opt source               destination         
+ACCEPT     tcp  --  anywhere             anywhere            tcp dpt:snmp source IP range 0.0.0.0-223.255.255.255 
+ACCEPT     udp  --  anywhere             anywhere            udp dpt:snmp source IP range 0.0.0.0-223.255.255.255 
+
+Chain url_filter_chain (1 references)
+target     prot opt source               destination         
+# 
