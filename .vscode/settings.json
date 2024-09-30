@@ -6,6 +6,7 @@
         "udp.h": "c",
         "linux_nfnetlink_queue.h": "c",
         "in.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "inet.h": "c"
     }
 }
