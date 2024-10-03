@@ -10,36 +10,39 @@
 #include <file_process.h>
 #include "dns.h"
 #include "packet_process.h"
+#include "log.h"
 
 #define ONE_BYTE 1
 #define TWO_BYTE 2
 #define FOUR_BYTE 4
 
+#define FILE_DATA "./data/data.txt"
+
 
 int get_dns_query_length(unsigned char *dns_query) {
     int name_length = 0;
     while (dns_query[name_length] != 0) {
-        name_length += dns_query[name_length] + 1;
+        name_length += dns_query[name_length] + ONE_BYTE;
     }
-    return name_length + 1 + 4;
+    return name_length + ONE_BYTE + FOUR_BYTE;
 }
 
 int get_dns_answer_length(unsigned char *dns_answer) {
     int name_length = 0;
     if ((dns_answer[0] & 0xC0) == 0xC0) {
-        name_length = 2;
+        name_length = TWO_BYTE;
     } else {
         while (dns_answer[name_length] != 0) {
-            name_length += dns_answer[name_length] + 1;
+            name_length += dns_answer[name_length] + ONE_BYTE;
         }
-        name_length += 1;
+        name_length += ONE_BYTE;
     }
 
     unsigned short type = ntohs(*(unsigned short *)(dns_answer + name_length));
-    unsigned short class = ntohs(*(unsigned short *)(dns_answer + name_length + 2));
-    unsigned int ttl = ntohl(*(unsigned int *)(dns_answer + name_length + 4));
+    unsigned short class = ntohs(*(unsigned short *)(dns_answer + name_length + TWO_BYTE));
+    unsigned int ttl = ntohl(*(unsigned int *)(dns_answer + name_length + FOUR_BYTE));
     unsigned short data_len = ntohs(*(unsigned short *)(dns_answer + name_length + 8));
-    int total_length = name_length + 2 + 2 + 4 + 2 + data_len;
+    int total_length = name_length + TWO_BYTE + TWO_BYTE + FOUR_BYTE + TWO_BYTE + data_len;
 
     return total_length;
 }
@@ -66,7 +69,7 @@ void printf_dns_query(unsigned char *dns_query){
     printf("QNAME: %s\n",decode_name);
     int qname_length = get_dns_query_length(dns_query) - 4;
     unsigned short qtype = ntohs(*(unsigned short *)(dns_query + qname_length));
-    unsigned short qclass = ntohs(*(unsigned short *)(dns_query + qname_length + 2));
+    unsigned short qclass = ntohs(*(unsigned short *)(dns_query + qname_length + TWO_BYTE));
     printf("QTYPE: %u\n",qtype);
     printf("QCLASS: %u\n",qclass);
 
@@ -120,16 +123,16 @@ void printf_dns_answer_to_console(unsigned char *dns_answer, unsigned char* dns_
     int answer_offset = 0;
     int name_length = 0;
     if ((dns_answer[0] & 0xC0) == 0xC0) {
-        name_length = 2;
+        name_length = TWO_BYTE;
     } else {
         while (dns_answer[name_length] != 0) {
-            name_length += dns_answer[name_length] + 1;
+            name_length += dns_answer[name_length] + ONE_BYTE;
         }
-        name_length += 1;
+        name_length += ONE_BYTE;
     }
     unsigned short type = ntohs(*(unsigned short *)(dns_answer + name_length));
-    unsigned short class = ntohs(*(unsigned short *)(dns_answer + name_length + 2));
-    unsigned int ttl = ntohl(*(unsigned int *)(dns_answer + name_length + 4));
+    unsigned short class = ntohs(*(unsigned short *)(dns_answer + name_length + TWO_BYTE));
+    unsigned int ttl = ntohl(*(unsigned int *)(dns_answer + name_length + FOUR_BYTE));
     unsigned short data_len = ntohs(*(unsigned short *)(dns_answer + name_length + 8));
     if (type == 1 && data_len == 4) {
         struct in_addr ipv4_addr;
@@ -140,7 +143,9 @@ void printf_dns_answer_to_console(unsigned char *dns_answer, unsigned char* dns_
         printf("ttl: %u\n",ttl);
         printf("len: %u\n",data_len);
         printf("IPv4 Address: %s\n", inet_ntoa(ipv4_addr));
+        printf("\n");
     }
+    LOG(LOG_LVL_ERROR, "test_printf_dns_answer_to_console: %s, %s, %d\n", __FILE__, __func__, __LINE__);
 }
 
 
@@ -149,7 +154,7 @@ void printf_dns_answer_to_file(unsigned char *dns_answer, unsigned char* dns_pay
 
     int name_length = 0;
     if ((dns_answer[0] & 0xC0) == 0xC0) {
-        name_length = 2;
+        name_length = TWO_BYTE;
     } else {
         while (dns_answer[name_length] != 0) {
             name_length += dns_answer[name_length] + 1;
@@ -158,18 +163,16 @@ void printf_dns_answer_to_file(unsigned char *dns_answer, unsigned char* dns_pay
     }
 
     unsigned short type = ntohs(*(unsigned short *)(dns_answer + name_length));
-    unsigned short class = ntohs(*(unsigned short *)(dns_answer + name_length + 2));
-    unsigned int ttl = ntohl(*(unsigned int *)(dns_answer + name_length + 4));
+    unsigned short class = ntohs(*(unsigned short *)(dns_answer + name_length + TWO_BYTE));
+    unsigned int ttl = ntohl(*(unsigned int *)(dns_answer + name_length + FOUR_BYTE));
     unsigned short data_len = ntohs(*(unsigned short *)(dns_answer + name_length + 8));
 
-
-    FILE *file = fopen("./data/data.txt", "a");
+    FILE *file = fopen(FILE_DATA, "a");
     if (file != NULL) {
-
         if (type == 1 && data_len == 4) {
             struct in_addr ipv4_addr;
             memcpy(&ipv4_addr, dns_answer + name_length + 10, sizeof(ipv4_addr));
-            printf_time_to_file("./data/data.txt");
+            printf_time_to_file(FILE_DATA);
             fprintf(file, "Answer Name: %s\n", get_dns_answer_name(dns_payload_content, answer_offset));
             fprintf(file, "Type: %u\n", type);
             fprintf(file, "Class: %u\n", class);

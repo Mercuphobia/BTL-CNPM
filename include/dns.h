@@ -40,6 +40,7 @@ void printf_dns_query(unsigned char *dns_query);
 void decode_dns_name_answer(unsigned char *dns_packet, unsigned char *buffer, int *offset, int start);
 unsigned char *get_dns_answer_name(unsigned char *dns_packet, int answer_offset);
 void printf_dns_answer_to_file(unsigned char *dns_answer, unsigned char* dns_payload_content);
+void printf_dns_answer_to_console(unsigned char *dns_answer, unsigned char* dns_payload_content);
 static u_int32_t process_packet(struct nfq_data *tb);
 
 #endif

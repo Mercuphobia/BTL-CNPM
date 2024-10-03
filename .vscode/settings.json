@@ -9,6 +9,8 @@
         "stdio.h": "c",
         "inet.h": "c",
         "file_process.h": "c",
-        "packet_process.h": "c"
+        "packet_process.h": "c",
+        "ip.h": "c",
+        "errno.h": "c"
     }
 }
