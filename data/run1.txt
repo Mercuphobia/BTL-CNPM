@@ -1,0 +1,241 @@
+# ./bin/app
+id: 1
+id: 2
+id: 3
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 55500
+DNS ID: 0x2346
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 4
+Source IP: 8.8.8.8
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 55500
+DNS ID: 0x2346
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 5
+id: 6
+id: 7
+id: 8
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 65492
+DNS ID: 0x324
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 9
+Source IP: 8.8.8.8
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 65492
+DNS ID: 0x324
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 10
+id: 11
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 51802
+DNS ID: 0xdc91
+number queries: 1
+number answer: 4
+number 3: 0
+number 4: 0
+
+id: 12
+id: 13
+id: 14
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 49217
+DNS ID: 0x329b
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 15
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 51489
+DNS ID: 0x94ee
+number queries: 1
+number answer: 2
+number 3: 8
+number 4: 0
+
+id: 16
+id: 17
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 49741
+DNS ID: 0xcab8
+number queries: 1
+number answer: 2
+number 3: 0
+number 4: 0
+
+id: 18
+id: 19
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 59273
+DNS ID: 0x883
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 20
+id: 21
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 50866
+DNS ID: 0xc4eb
+number queries: 1
+number answer: 2
+number 3: 0
+number 4: 0
+
+id: 22
+id: 23
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 64937
+DNS ID: 0x6bfe
+number queries: 1
+number answer: 2
+number 3: 0
+number 4: 0
+
+id: 24
+id: 25
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 57079
+DNS ID: 0xf858
+number queries: 1
+number answer: 17
+number 3: 0
+number 4: 0
+
+id: 26
+id: 27
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 58962
+DNS ID: 0x5bd0
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 28
+id: 29
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 61829
+DNS ID: 0x2552
+number queries: 1
+number answer: 16
+number 3: 0
+number 4: 0
+
+id: 30
+id: 31
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 60373
+DNS ID: 0x2536
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 32
+id: 33
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 59697
+DNS ID: 0x41f1
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 34
+id: 35
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 57599
+DNS ID: 0xf856
+number queries: 1
+number answer: 2
+number 3: 0
+number 4: 0
+
+id: 36
+id: 37
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 65328
+DNS ID: 0x959a
+number queries: 1
+number answer: 1
+number 3: 0
+number 4: 0
+
+id: 38
+id: 39
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 57469
+DNS ID: 0x895e
+number queries: 1
+number answer: 2
+number 3: 0
+number 4: 0
+
+id: 40
+id: 41
+Source IP: 123.23.23.23
+Destination IP: 192.168.1.2
+UDP Source Port: 53
+UDP Destination Port: 51746
+DNS ID: 0x38ac
+number queries: 1
+number answer: 2
+number 3: 0
+number 4: 0
