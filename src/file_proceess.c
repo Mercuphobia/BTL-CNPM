@@ -4,10 +4,7 @@
 #include <unistd.h>
 #include <ctype.h>
 #include <time.h>
-// #include "log.h"
-
-
-
+#include "log.h"
 
 
 
@@ -126,7 +123,7 @@ void printf_time_to_file(const char *file_name){
     FILE *file = open_file(file_name,"a");
     time_t now = time(NULL);
     struct tm *local = localtime(&now);
-    fprintf(file, "DATE: %02d:%02d:%02d:%02d-%02d-%04d\n",local->tm_hour, 
+    fprintf(file, "TIME: %02d:%02d:%02d DATE:%02d-%02d-%04d\n",local->tm_hour, 
     local->tm_min, local->tm_sec, local->tm_mday, local->tm_mon + 1, local->tm_year + 1900);
     fclose(file);
 }

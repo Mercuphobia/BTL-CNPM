@@ -16,23 +16,16 @@
 
 int main(int argc, char *argv[]) {
 
-    // if(argc >1){
-    //     parsers_option(argc,argv);
-    // }
-    // else{
-    //     signal(SIGINT, cleanup);
-    // //atexit(cleanup);
-    //     add_rules_iptables();
-    //     start_packet_capture();
-    //     LOG(LOG_LVL_ERROR, "test3: %s, %s, %d\n", __FILE__, __func__, __LINE__);
-    // }
-    parsers_option(argc,argv);
-    signal(SIGINT, cleanup);
-    //atexit(cleanup);
-    add_rules_iptables();
-    start_packet_capture();
-    LOG(LOG_LVL_ERROR, "test3: %s, %s, %d\n", __FILE__, __func__, __LINE__);
-
+    if(argc >1){
+        parsers_option(argc,argv);
+    }
+    else{
+        signal(SIGINT, cleanup);
+        //atexit(cleanup);
+        add_rules_iptables();
+        start_packet_capture();
+        LOG(LOG_LVL_ERROR, "test3: %s, %s, %d\n", __FILE__, __func__, __LINE__);
+    }
 }
 
 

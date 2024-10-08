@@ -33,6 +33,7 @@ struct dns_answer {
     unsigned int ip_addr;    
 };
 
+void clear_file_to_start();
 int get_dns_query_length(unsigned char *dns_query);
 int get_dns_answer_length(unsigned char *dns_answer);
 void decode_dns_name(unsigned char *dns, unsigned char *buffer, int *offset);
