@@ -15,7 +15,6 @@ int log_level_set = 0;
 void print_help(){
     printf("Options:\n");
     printf("  -d, --debug <val>     Set log level (0=Disabled, 1=Error, 2=Warn, 3=Debug)\n");
-    // printf("  -i, --interface<val> Scan interface (None=all, 1=2G, 2=5G)\n");
     printf("  -h, --help            Print message information\n");
     LOG(LOG_LVL_ERROR, "test7: %s, %s, %d\n", __FILE__, __func__, __LINE__);
 }
@@ -63,7 +62,7 @@ void parsers_option(int argc, char *argv[])
             break;
 
         default:
-            fprintf(stderr, "Usage: %s [-d loglevel] [-i interface]\n", argv[0]);
+            fprintf(stderr, "Usage: %s [-d loglevel] [-h]\n", argv[0]);
         }
     }
     LOG(LOG_LVL_DEBUG, "%s, %d: test8\n", __func__, __LINE__);

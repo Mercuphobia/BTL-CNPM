@@ -16,14 +16,12 @@ struct dns_header {
     unsigned short arcount;  
 };
 
-// Cấu trúc DNS Queries
 struct dns_queries {
     unsigned short qname;   
     unsigned short qtype;    
     unsigned short qclass;   
 };
 
-// Cấu trúc DNS Answer
 struct dns_answer {
     unsigned short name;
     unsigned short type;     

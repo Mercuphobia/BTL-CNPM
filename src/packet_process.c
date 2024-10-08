@@ -44,11 +44,11 @@ void cleanup()
 static int cb(struct nfq_q_handle *qh, struct nfgenmsg *nfmsg, struct nfq_data *nfa, void *data)
 {
     u_int32_t id;
-    struct nfqnl_msg_packet_hdr *ph;
-    ph = nfq_get_msg_packet_hdr(nfa);
-    if (ph)
+    struct nfqnl_msg_packet_hdr *packet_header;
+    packet_header = nfq_get_msg_packet_hdr(nfa);
+    if (packet_header)
     {
-        id = ntohl(ph->packet_id);
+        id = ntohl(packet_header->packet_id);
     }
     unsigned char *packet_data;
     int ret = nfq_get_payload(nfa, &packet_data);
