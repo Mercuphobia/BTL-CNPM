@@ -145,7 +145,7 @@ void printf_dns_answer_to_console(unsigned char *dns_answer, unsigned char* dns_
     if (type == 1 && data_len == 4) {
         struct in_addr ipv4_addr;
         memcpy(&ipv4_addr, dns_answer + name_length + 10, sizeof(ipv4_addr));
-        printf("Name : %s\n",get_dns_answer_name(dns_payload_content,answer_offset));
+        printf("Name: %s\n",get_dns_answer_name(dns_payload_content,answer_offset));
         //printf("Type: %u\n",type);
         //printf("Class: %u\n",class);
         //printf("TTL: %u\n",ttl);

@@ -33,8 +33,7 @@
 void cleanup()
 {
     LOG(LOG_LVL_ERROR, "test_cleanup: %s, %s, %d\n", __FILE__, __func__, __LINE__);
-    // system(RULE_DELETE_FORWARD_SPORT);
-
+    //system(RULE_DELETE_FORWARD_SPORT);
     system(RULE_DELETE_INPUT_SPORT);
     system(RULE_DELETE_INPUT_DPORT);
     system(RULE_DELETE_OUTPUT_SPORT);
@@ -113,8 +112,7 @@ static int cb(struct nfq_q_handle *qh, struct nfgenmsg *nfmsg, struct nfq_data *
 void add_rules_iptables()
 {
     LOG(LOG_LVL_DEBUG, "test_rules_iptables: %s, %s, %d\n", __FILE__, __func__, __LINE__);
-    // system(RULE_FORWARD_SPORT);
-
+    //system(RULE_FORWARD_SPORT);
     system(RULE_INPUT_SPORT);
     system(RULE_INPUT_DPORT);
     system(RULE_OUTPUT_SPORT);
@@ -162,7 +160,6 @@ void start_packet_capture()
 
     while ((rv = recv(fd, buf, sizeof(buf), 0)))
     {
-        // printf("pkt received\n");
         nfq_handle_packet(h, buf, rv);
     }
 
@@ -178,6 +175,5 @@ void start_packet_capture()
 
     printf("closing library handle\n");
     nfq_close(h);
-
     exit(0);
 }
