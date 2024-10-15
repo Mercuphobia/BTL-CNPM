@@ -100,8 +100,21 @@ static int cb(struct nfq_q_handle *qh, struct nfgenmsg *nfmsg, struct nfq_data *
                     // printf("number answer: %u\n",ntohl(dns->ancount));
                     // printf("number 3: %u\n",ntohl(dns->nscount));
                     // printf("number 4: %u\n",ntohl(dns->arcount));
-                    printf_dns_answer_to_console(dns_answer,dns_payload_content);
-                    printf_dns_answer_to_file(dns_answer, dns_payload_content);
+                    for(int i=0;i<number_of_answer;i++){
+                        printf_dns_answer_to_console(dns_answer,dns_payload_content);
+                        printf_dns_answer_to_file(dns_answer, dns_payload_content);
+                        int name_length = 0;
+                        if ((dns_answer[0] & 0xC0) == 0xC0) {
+                            name_length = 2;
+                        } else {
+                            while (dns_answer[name_length] != 0) {
+                                name_length += dns_answer[name_length] + 1;
+                            }
+                            name_length += 1;
+                        }
+                        unsigned short data_len = ntohs(*(unsigned short *)(dns_answer + name_length + 8));
+                        dns_answer += name_length + 10 + data_len;
+                    }
                 }
             }
         }

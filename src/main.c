@@ -32,5 +32,3 @@ int main(int argc, char *argv[]) {
     start_packet_capture();
     LOG(LOG_LVL_ERROR, "test3: %s, %s, %d\n", __FILE__, __func__, __LINE__);
 }
-
-
